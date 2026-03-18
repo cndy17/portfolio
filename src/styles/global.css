@@ -220,6 +220,24 @@ body { background: var(--bg); color: var(--ink); font-family: var(--mono); curso
 }
 
 /* home work rows */
+/* ── HOME ABOUT ── */
+.home-about {
+  padding: 32px 32px 40px;
+  max-width: 560px;
+}
+.home-about-text {
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.8;
+  color: var(--ink);
+  margin-bottom: 16px;
+}
+.home-about-links {
+  display: flex;
+  gap: 16px;
+}
+
 .sec-bar {
   display: flex; align-items: center; justify-content: space-between;
   padding: 12px 32px;
