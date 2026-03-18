@@ -3,7 +3,7 @@ interface Props {
   title?: string;
 }
 const { title = 'Cindy Li' } = Astro.props;
-const base = import.meta.env.BASE_URL;
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 const isHome = Astro.url.pathname === base || Astro.url.pathname === base.replace(/\/$/, '');
 ---
 <html lang="en">

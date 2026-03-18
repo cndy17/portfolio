@@ -7,7 +7,7 @@ const rendered = await Promise.all(makes.map(async (m) => {
   const { Content } = await render(m);
   return { id: m.id, Content };
 }));
-const base = import.meta.env.BASE_URL;
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 ---
 <Base title="Makes — Cindy Li">
   <div class="view on">
@@ -48,7 +48,7 @@ const base = import.meta.env.BASE_URL;
               {m.data.photos && m.data.photos.length > 0 && (
                 <div class="make-img-row">
                   {m.data.photos.map((photo) => (
-                    <img class="make-img" src={`${base}/${photo.replace(/^\//, '')}`} alt={m.data.title} />
+                    <img class="make-img" src={`${base}${photo.replace(/^\//, '')}`} alt={m.data.title} />
                   ))}
                 </div>
               )}

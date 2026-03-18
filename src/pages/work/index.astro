@@ -4,7 +4,7 @@ import CodeTexture from '../../components/CodeTexture.astro';
 import { getCollection } from 'astro:content';
 
 const works = (await getCollection('work')).sort((a, b) => a.data.order - b.data.order);
-const base = import.meta.env.BASE_URL;
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 const thumbBgs = ['#1a1a2e','#0d1117','#1e1e1e','#0a1628','#1e1428','#1a1a2e','#0d1117','#1e1e1e'];
 ---
 <Base title="Work — Cindy Li">
@@ -21,7 +21,7 @@ const thumbBgs = ['#1a1a2e','#0d1117','#1e1e1e','#0a1628','#1e1428','#1a1a2e','#
           <div class="wtitle">{w.data.title}</div>
           <div class="wstrip">
             {w.data.heroImage ? (
-              <img class="thumb-img" src={`${base}/${w.data.heroImage.replace(/^\//, '')}`} alt={w.data.title} />
+              <img class="thumb-img" src={`${base}${w.data.heroImage.replace(/^\//, '')}`} alt={w.data.title} />
             ) : (
               <CodeTexture bg={thumbBgs[i]} />
             )}

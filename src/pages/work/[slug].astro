@@ -13,7 +13,7 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const { Content } = await render(entry);
-const base = import.meta.env.BASE_URL;
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 
 const allWorks = (await getCollection('work')).sort((a, b) => a.data.order - b.data.order);
 const currentIdx = allWorks.findIndex((w) => w.id === entry.id);
@@ -57,7 +57,7 @@ const nextWork = allWorks[(currentIdx + 1) % allWorks.length];
       </div>
       <div class="proj-hero-right">
         {entry.data.heroImage ? (
-          <img class="proj-main-img" src={`${base}/${entry.data.heroImage.replace(/^\//, '')}`} alt={entry.data.title} />
+          <img class="proj-main-img" src={`${base}${entry.data.heroImage.replace(/^\//, '')}`} alt={entry.data.title} />
         ) : (
           <div class="proj-main-thumb">
             <CodeTexture />
