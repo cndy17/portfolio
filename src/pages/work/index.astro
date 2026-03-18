@@ -1,0 +1,36 @@
+---
+import Base from '../../layouts/Base.astro';
+import CodeTexture from '../../components/CodeTexture.astro';
+import { getCollection } from 'astro:content';
+
+const works = (await getCollection('work')).sort((a, b) => a.data.order - b.data.order);
+const base = import.meta.env.BASE_URL;
+const thumbBgs = ['#1a1a2e','#0d1117','#1e1e1e','#0a1628','#1e1428','#1a1a2e','#0d1117','#1e1e1e'];
+---
+<Base title="Work — Cindy Li">
+  <div class="view on">
+    <div class="sec-bar" style="margin-top:24px;">
+      <span class="sec-title">Work.</span>
+      <span class="sec-count">{String(works.length).padStart(2, '0')} projects</span>
+    </div>
+
+    {works.map((w, i) => (
+      <a class="wrow" data-label={w.data.cursorLabel} href={`${base}work/${w.id}/`}>
+        <div class="wnum">{String(w.data.order).padStart(3, '0')}</div>
+        <div class="wright">
+          <div class="wtitle">{w.data.title}</div>
+          <div class="wstrip">
+            {w.data.heroImage ? (
+              <img class="thumb-img" src={`${base}${w.data.heroImage.replace(/^\//, '')}`} alt={w.data.title} />
+            ) : (
+              <CodeTexture bg={thumbBgs[i]} />
+            )}
+            <div class="wtags">
+              {w.data.tags.map((tag) => <span class="wtag">{tag}</span>)}
+            </div>
+          </div>
+        </div>
+      </a>
+    ))}
+  </div>
+</Base>

@@ -1,0 +1,94 @@
+---
+import Base from '../../layouts/Base.astro';
+import CodeTexture from '../../components/CodeTexture.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const works = await getCollection('work');
+  return works.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const base = import.meta.env.BASE_URL;
+
+const allWorks = (await getCollection('work')).sort((a, b) => a.data.order - b.data.order);
+const currentIdx = allWorks.findIndex((w) => w.id === entry.id);
+const nextWork = allWorks[(currentIdx + 1) % allWorks.length];
+---
+<Base title={`${entry.data.title} — Cindy Li`}>
+  <div class="view on">
+    <div class="proj-hero">
+      <div class="proj-hero-left">
+        <div>
+          <div class="proj-num">
+            Project {String(entry.data.order).padStart(3, '0')} &nbsp;·&nbsp; {entry.data.tags[0]}
+          </div>
+          <div class="proj-title">{entry.data.title}.</div>
+          <div class="proj-desc">{entry.data.subtitle}</div>
+        </div>
+        <div class="proj-meta">
+          <div class="proj-meta-row">
+            <div class="proj-meta-label">Year</div>
+            <div class="proj-meta-val">{entry.data.year}</div>
+          </div>
+          <div class="proj-meta-row">
+            <div class="proj-meta-label">Stack</div>
+            <div class="proj-meta-val">{entry.data.stack.join(' · ')}</div>
+          </div>
+          {entry.data.role && (
+            <div class="proj-meta-row">
+              <div class="proj-meta-label">Role</div>
+              <div class="proj-meta-val">{entry.data.role}</div>
+            </div>
+          )}
+          {entry.data.github && (
+            <div class="proj-meta-row">
+              <div class="proj-meta-label">Link</div>
+              <div class="proj-meta-val">
+                <a class="alink" href={entry.data.github} target="_blank" style="color:var(--blue);">View on GitHub ↗</a>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+      <div class="proj-hero-right">
+        {entry.data.heroImage ? (
+          <img class="proj-main-img" src={`${base}${entry.data.heroImage.replace(/^\//, '')}`} alt={entry.data.title} />
+        ) : (
+          <div class="proj-main-thumb">
+            <CodeTexture />
+          </div>
+        )}
+      </div>
+    </div>
+
+    <div class="proj-body">
+      {entry.data.stats && entry.data.stats.length > 0 && (
+        <div class="proj-stats">
+          {entry.data.stats.map((s) => (
+            <div class="stat-chip">
+              <span class="stat-num">{s.value}</span>
+              <span class="stat-lbl">{s.label}</span>
+            </div>
+          ))}
+        </div>
+      )}
+
+      <div class="proj-content">
+        <Content />
+      </div>
+    </div>
+
+    <a class="next-proj" data-label="NEXT PROJECT" href={`${base}work/${nextWork.id}/`}>
+      <div>
+        <div class="np-label">Next project</div>
+        <div class="np-title">{nextWork.data.title}</div>
+      </div>
+      <div class="np-arrow">↗</div>
+    </a>
+  </div>
+</Base>

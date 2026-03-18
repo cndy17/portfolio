@@ -1,0 +1,61 @@
+---
+import Base from '../layouts/Base.astro';
+import { getCollection, render } from 'astro:content';
+
+const makes = (await getCollection('makes')).sort((a, b) => a.data.order - b.data.order);
+const rendered = await Promise.all(makes.map(async (m) => {
+  const { Content } = await render(m);
+  return { id: m.id, Content };
+}));
+const base = import.meta.env.BASE_URL;
+---
+<Base title="Makes — Cindy Li">
+  <div class="view on">
+    <div class="makes-intro">
+      <div class="makes-title">Cindy<br /><em>Makes.</em></div>
+      <div class="makes-sub">crafts · objects · things</div>
+    </div>
+
+    {makes.map((m) => {
+      const num = String(m.data.order).padStart(3, '0');
+      const id = `m${m.data.order}`;
+      return (
+        <>
+          <div
+            class="mrow"
+            data-label={m.data.wip ? 'IN PROGRESS' : 'SEE MORE'}
+            onclick={m.data.wip ? undefined : `toggleMake('${id}')`}
+          >
+            <div class="wnum">{num}</div>
+            <div class="mright">
+              <div class:list={['mtitle', { 'wip-title': m.data.wip }]}>
+                {m.data.title}
+              </div>
+              <div class="mstrip">
+                <div class:list={['mthumb', { 'wip-thumb': m.data.wip }]} style="width:80px;background:var(--warm);"></div>
+                <div class="wtags">
+                  <span class="wtag">{m.data.material}</span>
+                  <span class="wtag">{m.data.year}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          {!m.data.wip && (
+            <div class="make-expanded" id={id}>
+              <div class="make-expanded-body">
+                {(() => { const r = rendered.find(x => x.id === m.id); return r ? <r.Content /> : null; })()}
+              </div>
+              {m.data.photos && m.data.photos.length > 0 && (
+                <div class="make-img-row">
+                  {m.data.photos.map((photo) => (
+                    <img class="make-img" src={`${base}${photo.replace(/^\//, '')}`} alt={m.data.title} />
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+        </>
+      );
+    })}
+  </div>
+</Base>

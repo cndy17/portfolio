@@ -1,0 +1,110 @@
+---
+import Base from '../layouts/Base.astro';
+const base = import.meta.env.BASE_URL;
+---
+<Base title="About — Cindy Li">
+  <div class="view on">
+    <div class="about-grid">
+      <div class="about-left">
+        <div class="about-name">Cindy<br /><em>Li.</em></div>
+
+        <div class="polaroid">
+          <div class="polaroid-img"></div>
+          <div class="polaroid-caption">New York City, 2025</div>
+        </div>
+
+        <div class="about-bio">
+          I'm a <strong>Business Analyst and maker</strong> based in New York City. I find patterns in data for a living and make things with my hands for fun — sometimes these two things overlap more than you'd think.<br /><br />
+          Currently pursuing my <strong>MS in Data Analytics</strong> at the Zicklin School of Business while interning at the Crohn's &amp; Colitis Foundation as a Finance Systems Intern, automating financial reports. Prior to that, I was a Business Analyst at Bank of America, designing data pipelines and working with technical and non-technical teams globally.<br /><br />
+          Outside of work you can find me taking dance classes, rock climbing, and sewing. I'm passionate about sustainable fashion and innovative technology that reduces the environmental impact of the fashion industry. That's what <em>Cindy Makes</em> is about.
+        </div>
+        <div class="about-links">
+          <a class="alink" href="mailto:cndyli17@gmail.com">cndyli17@gmail.com</a>
+          <a class="alink" href="https://github.com/cndy17" target="_blank">GitHub</a>
+          <a class="alink" href="https://linkedin.com/in/cndyli" target="_blank">LinkedIn</a>
+        </div>
+      </div>
+
+      <div class="about-right">
+        <div class="cv-section">
+          <div class="cv-sec-label">Experience</div>
+          <div class="cv-entry">
+            <div class="cv-year">2025 —<br />present</div>
+            <div>
+              <div class="cv-role">Finance Systems Intern</div>
+              <div class="cv-org">Crohn's & Colitis Foundation · NYC</div>
+            </div>
+          </div>
+          <div class="cv-entry">
+            <div class="cv-year">2023 —<br />2024</div>
+            <div>
+              <div class="cv-role">Business Analyst</div>
+              <div class="cv-org">Bank of America</div>
+              <div class="cv-note">Financial systems analysis, data reporting, process optimization.</div>
+            </div>
+          </div>
+          <div class="cv-entry">
+            <div class="cv-year">2022</div>
+            <div>
+              <div class="cv-role">Summer Business Analyst</div>
+              <div class="cv-org">Bank of America</div>
+            </div>
+          </div>
+          <div class="cv-entry">
+            <div class="cv-year">2020 —<br />2023</div>
+            <div>
+              <div class="cv-role">Administrative Assistant</div>
+              <div class="cv-org">Woods College of Advancing Studies, Boston College</div>
+            </div>
+          </div>
+          <div class="cv-entry">
+            <div class="cv-year">2021 —<br />2022</div>
+            <div>
+              <div class="cv-role">Marketing Research Assistant</div>
+              <div class="cv-org">Carroll School of Management</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cv-section">
+          <div class="cv-sec-label">Education</div>
+          <div class="cv-entry">
+            <div class="cv-year">2024 —<br />2025</div>
+            <div>
+              <div class="cv-role">MS in Data Analytics</div>
+              <div class="cv-org">Zicklin School of Business</div>
+            </div>
+          </div>
+          <div class="cv-entry">
+            <div class="cv-year">2019 —<br />2023</div>
+            <div>
+              <div class="cv-role">BS in Management Information Systems & Business Analytics</div>
+              <div class="cv-org">Boston College, Carroll School of Management · CS minor</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cv-section">
+          <div class="cv-sec-label">Skills</div>
+          <div class="skills-grid">
+            <span class="skill">Python</span>
+            <span class="skill">SQL</span>
+            <span class="skill">Tableau</span>
+            <span class="skill">Pandas</span>
+            <span class="skill">Data Visualization</span>
+            <span class="skill">Business Analysis</span>
+            <span class="skill">Financial Systems</span>
+            <span class="skill">Web3 / Solidity</span>
+            <span class="skill">JavaScript</span>
+            <span class="skill">Database Design</span>
+            <span class="skill">R</span>
+            <span class="skill">Machine Learning</span>
+            <span class="skill">Excel</span>
+          </div>
+        </div>
+
+        <a class="dl-btn" href={`${base}assets/cv.pdf`} download>Download CV &nbsp;↓</a>
+      </div>
+    </div>
+  </div>
+</Base>

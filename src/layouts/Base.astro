@@ -1,0 +1,68 @@
+---
+interface Props {
+  title?: string;
+}
+const { title = 'Cindy Li' } = Astro.props;
+const base = import.meta.env.BASE_URL;
+const isHome = Astro.url.pathname === base || Astro.url.pathname === base.replace(/\/$/, '');
+---
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400&family=Playfair+Display:ital,wght@0,900;1,300;1,700&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet" />
+  <style is:global>
+    @import '../styles/global.css';
+  </style>
+</head>
+<body>
+
+<div id="cur"></div>
+<div id="clb"></div>
+
+<!-- INFO DRAWER -->
+<div class="drawer" id="drawer">
+  <div class="dl">About</div>
+  <div class="db">Data analyst & maker based in New York City.<br />I find patterns in numbers and make things with my hands.</div>
+  <div class="dl">Experience</div>
+  <table class="dt">
+    <tr><td>2025</td><td>Finance Systems Intern — Crohn's & Colitis Foundation</td></tr>
+    <tr><td>prev</td><td>Business Analyst — Bank of America</td></tr>
+    <tr><td>MSDA</td><td>Zicklin School of Business — Data Analytics</td></tr>
+    <tr><td>BS</td><td>Boston College — IS & Business Analytics, CS minor</td></tr>
+  </table>
+  <div class="d-btns">
+    <a class="dbtn" href="mailto:cndyli17@gmail.com">E-mail</a>
+    <a class="dbtn" href="https://github.com/cndy17" target="_blank">GitHub</a>
+    <a class="dbtn" href="https://linkedin.com/in/cndyli" target="_blank">LinkedIn</a>
+  </div>
+</div>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-track" id="ticker-track"></div>
+</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class:list={['nav-name', { hidden: isHome }]}>Cindy Li.</div>
+  <div class="nav-links">
+    <a class:list={['npill', { on: isHome }]} href={`${base}`}>Home</a>
+    <a class:list={['npill', { on: Astro.url.pathname.startsWith(base + 'work') }]} href={`${base}work/`}>Work</a>
+    <a class:list={['npill', { on: Astro.url.pathname.includes('makes') }]} href={`${base}makes/`}>Makes</a>
+    <a class:list={['npill', { on: Astro.url.pathname.includes('about') }]} href={`${base}about/`}>About</a>
+    <button class="npill" id="info-btn">Info</button>
+  </div>
+  <div class="nav-right">NYC</div>
+</nav>
+
+<main>
+  <slot />
+</main>
+
+<script src="../scripts/main.js"></script>
+</body>
+</html>

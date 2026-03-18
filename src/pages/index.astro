@@ -1,0 +1,67 @@
+---
+import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+const works = (await getCollection('work')).sort((a, b) => a.data.order - b.data.order);
+const base = import.meta.env.BASE_URL;
+
+const fanCards = [
+  { bg: 'bg-navy', label: works[0]?.data.cursorLabel, sublabel: 'data viz', lines: ['l hi','m','ind','ind2','l blu','s','m hi','l','ind grn','m','s hi','l'] },
+  { bg: 'bg-gh', label: works[1]?.data.cursorLabel, sublabel: 'web3', lines: ['s grn','l','m hi','ind blu','l','s','m hi','ind2','l','m grn','s hi','l'] },
+  { bg: 'bg-vsc', label: works[2]?.data.cursorLabel, sublabel: 'database', lines: ['m','l hi','ind red','s','l','m hi','ind2','l red','s hi','m','l','ind hi'] },
+  { bg: 'bg-plum', label: 'CINDY MAKES', sublabel: 'makes', special: true },
+];
+---
+<Base>
+  <div class="view on">
+    <div class="hero">
+      <div class="hero-name">
+        Cindy<br /><em>Li.</em>
+        <span class="sub">analyst &amp; maker</span>
+      </div>
+      <div class="fan">
+        {fanCards.map((card) => (
+          <div class={`fc ${card.bg}`} data-label={card.label}>
+            <div class="code-card">
+              {card.special ? (
+                <>
+                  <div style="width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.1);"></div>
+                  <div style="width:64px;height:4px;border-radius:2px;background:rgba(255,255,255,.2);"></div>
+                  <div style="width:44px;height:4px;border-radius:2px;background:rgba(255,255,255,.12);"></div>
+                </>
+              ) : (
+                card.lines.map((cls) => <div class={`cl ${cls}`} />)
+              )}
+            </div>
+            <div class="fc-lbl">{card.sublabel}</div>
+          </div>
+        ))}
+      </div>
+      <div class="hero-descriptor">analyst &amp; maker, new york city.</div>
+    </div>
+
+    <div class="sec-bar">
+      <span class="sec-title">Selected work.</span>
+      <span class="sec-count">{String(works.length).padStart(2, '0')} projects</span>
+    </div>
+
+    {works.map((w) => (
+      <a class="wrow" data-label={w.data.cursorLabel} href={`${base}work/${w.id}/`}>
+        <div class="wnum">{String(w.data.order).padStart(3, '0')}</div>
+        <div class="wright">
+          <div class="wtitle">{w.data.title}</div>
+          <div class="wstrip">
+            {w.data.heroImage ? (
+              <img class="thumb-img" src={`${base}${w.data.heroImage.replace(/^\//, '')}`} alt={w.data.title} />
+            ) : (
+              <div class="thumb t1"><div class="cl l hi"></div><div class="cl m"></div><div class="cl s"></div></div>
+            )}
+            <div class="wtags">
+              {w.data.tags.map((tag) => <span class="wtag">{tag}</span>)}
+            </div>
+          </div>
+        </div>
+      </a>
+    ))}
+  </div>
+</Base>
