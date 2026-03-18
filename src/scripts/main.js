@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* ── info drawer ── */
   const drawer = document.getElementById("drawer");
-  const infoBtn = document.querySelector(".dbtn");
+  const infoBtn = document.getElementById("info-btn");
 
   if (drawer && infoBtn) {
     infoBtn.addEventListener("click", (e) => {
@@ -83,7 +83,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     document.addEventListener("click", (e) => {
-      if (!e.target.closest(".drawer") && !e.target.closest(".dbtn")) {
+      if (!e.target.closest(".drawer") && !e.target.closest("#info-btn")) {
         drawer.classList.remove("open");
       }
     });
