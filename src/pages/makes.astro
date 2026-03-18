@@ -48,7 +48,7 @@ const base = import.meta.env.BASE_URL;
               {m.data.photos && m.data.photos.length > 0 && (
                 <div class="make-img-row">
                   {m.data.photos.map((photo) => (
-                    <img class="make-img" src={`${base}${photo.replace(/^\//, '')}`} alt={m.data.title} />
+                    <img class="make-img" src={`${base}/${photo.replace(/^\//, '')}`} alt={m.data.title} />
                   ))}
                 </div>
               )}

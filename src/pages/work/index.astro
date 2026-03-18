@@ -21,7 +21,7 @@ const thumbBgs = ['#1a1a2e','#0d1117','#1e1e1e','#0a1628','#1e1428','#1a1a2e','#
           <div class="wtitle">{w.data.title}</div>
           <div class="wstrip">
             {w.data.heroImage ? (
-              <img class="thumb-img" src={`${base}${w.data.heroImage.replace(/^\//, '')}`} alt={w.data.title} />
+              <img class="thumb-img" src={`${base}/${w.data.heroImage.replace(/^\//, '')}`} alt={w.data.title} />
             ) : (
               <CodeTexture bg={thumbBgs[i]} />
             )}

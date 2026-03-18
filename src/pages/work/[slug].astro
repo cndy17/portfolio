@@ -57,7 +57,7 @@ const nextWork = allWorks[(currentIdx + 1) % allWorks.length];
       </div>
       <div class="proj-hero-right">
         {entry.data.heroImage ? (
-          <img class="proj-main-img" src={`${base}${entry.data.heroImage.replace(/^\//, '')}`} alt={entry.data.title} />
+          <img class="proj-main-img" src={`${base}/${entry.data.heroImage.replace(/^\//, '')}`} alt={entry.data.title} />
         ) : (
           <div class="proj-main-thumb">
             <CodeTexture />

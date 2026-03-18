@@ -52,7 +52,7 @@ const fanCards = [
           <div class="wtitle">{w.data.title}</div>
           <div class="wstrip">
             {w.data.heroImage ? (
-              <img class="thumb-img" src={`${base}${w.data.heroImage.replace(/^\//, '')}`} alt={w.data.title} />
+              <img class="thumb-img" src={`${base}/${w.data.heroImage.replace(/^\//, '')}`} alt={w.data.title} />
             ) : (
               <div class="thumb t1"><div class="cl l hi"></div><div class="cl m"></div><div class="cl s"></div></div>
             )}
