@@ -20,11 +20,9 @@ const thumbBgs = ['#1a1a2e','#0d1117','#1e1e1e','#0a1628','#1e1428','#1a1a2e','#
         <div class="wright">
           <div class="wtitle">{w.data.title}</div>
           <div class="wstrip">
-            {w.data.heroImage ? (
-              <img class="thumb-img" src={`${base}${w.data.heroImage.replace(/^\//, '')}`} alt={w.data.title} />
-            ) : (
-              <CodeTexture bg={thumbBgs[i]} />
-            )}
+            <div class="thumb t1"><div class="cl l hi"></div><div class="cl m"></div><div class="cl s hi"></div><div class="cl l"></div><div class="cl m hi"></div><div class="cl s"></div><div class="cl l hi"></div></div>
+            <div class="thumb t2"><div class="cl m hi"></div><div class="cl l"></div><div class="cl s grn"></div><div class="cl m"></div><div class="cl l grn"></div><div class="cl s"></div></div>
+            <div class="thumb t3"><div class="cl l"></div><div class="cl m hi"></div><div class="cl ind"></div><div class="cl s"></div><div class="cl l"></div><div class="cl m"></div></div>
             <div class="wtags">
               {w.data.tags.map((tag) => <span class="wtag">{tag}</span>)}
             </div>
